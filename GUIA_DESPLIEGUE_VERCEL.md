@@ -1,156 +1,270 @@
-# 🚀 Guía de Despliegue en Vercel - DigitalHub
+# 🚀 Guía Completa de Despliegue en Vercel - DigitalHub 2.0
 
-## 📋 Requisitos Previos
+## 📋 Resumen del Proyecto
+- **Backend:** Node.js + Express + MySQL
+- **Frontend:** React + Vite
+- **Repositorio:** https://github.com/lauravasquez1107-web/DigitalHub2.0.git
+- **Estado:** ✅ Código subido y listo para despliegue
 
-1. **Cuenta en Vercel**: [vercel.com](https://vercel.com)
-2. **Base de datos MySQL en la nube** (recomendado):
-   - [PlanetScale](https://planetscale.com) (Gratis)
-   - [Railway](https://railway.app) (Gratis con límites)
-   - [Aiven](https://aiven.io) (Gratis con límites)
-3. **Repositorio en GitHub** con tu código
+---
 
-## 🗄️ Paso 1: Configurar Base de Datos
+## 🎯 PASO 1: Configurar Base de Datos MySQL en la Nube
 
-### Opción A: PlanetScale (Recomendado)
-1. Crear cuenta en [PlanetScale](https://planetscale.com)
-2. Crear nueva base de datos llamada `digital-hub`
-3. Obtener string de conexión
-4. Ejecutar migraciones desde tu local:
-   ```bash
-   cd backend
-   npm install -g knex
-   knex migrate:latest
+### Opción A: PlanetScale (Recomendado) 🌟
+
+1. **Crear cuenta:**
+   - Ir a [PlanetScale](https://planetscale.com/)
+   - Registrarse con GitHub o email
+   - Verificar cuenta
+
+2. **Crear base de datos:**
+   ```
+   - Click "Create database"
+   - Nombre: "digital-hub" 
+   - Región: "US East" (más rápido para Vercel)
+   - Plan: "Hobby" (gratis)
    ```
 
-### Opción B: Railway
-1. Crear cuenta en [Railway](https://railway.app)
-2. Crear nuevo proyecto MySQL
-3. Obtener credenciales de conexión
-
-## 🔧 Paso 2: Desplegar Backend
-
-1. **Subir código a GitHub** (si no lo has hecho):
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/tu-usuario/tu-repo.git
-   git push -u origin main
+3. **Obtener credenciales:**
+   ```
+   - Ir a "Settings" > "Passwords"
+   - Click "New password"
+   - Nombre: "vercel-production"
+   - Copiar las credenciales:
+     * Host: xxxxx.us-east-1.psdb.cloud
+     * Username: xxxxx
+     * Password: xxxxx
+     * Database: digital_hub
    ```
 
-2. **Conectar con Vercel**:
-   - Ir a [vercel.com](https://vercel.com)
-   - Hacer clic en "New Project"
-   - Importar tu repositorio de GitHub
-   - Seleccionar la carpeta `backend`
+### Opción B: Railway 🚂
 
-3. **Configurar variables de entorno en Vercel**:
+1. **Crear cuenta:**
+   - Ir a [Railway](https://railway.app/)
+   - Conectar con GitHub
+
+2. **Crear servicio MySQL:**
    ```
-   NODE_ENV=production
-   PORT=3001
-   JWT_SECRET=tu_jwt_secret_super_seguro_cambiar_esto
-   DB_HOST=tu_host_mysql_de_planetscale
-   DB_USER=tu_usuario_mysql
-   DB_PASS=tu_password_mysql
-   DB_NAME=digital_hub
-   EMAIL_USER=tu_email@gmail.com
-   EMAIL_PASS=tu_app_password_gmail
-   FRONTEND_URL=https://tu-frontend.vercel.app
+   - New Project > Deploy MySQL
+   - Esperar a que se despliegue
+   - Ir a Variables > Connect
+   - Copiar credenciales de conexión
    ```
 
-4. **Desplegar**: Vercel desplegará automáticamente
+---
 
-## 🎨 Paso 3: Desplegar Frontend
+## 🚀 PASO 2: Desplegar Backend en Vercel
 
-1. **Crear nuevo proyecto en Vercel**:
-   - Nuevo proyecto desde el mismo repositorio
-   - Seleccionar la carpeta `frontend`
+### 2.1 Importar Proyecto
 
-2. **Configurar variables de entorno**:
+1. **Ir a Vercel Dashboard:**
+   - [vercel.com/dashboard](https://vercel.com/dashboard)
+   - Click "Add New..." > "Project"
+
+2. **Importar repositorio:**
    ```
-   VITE_API_URL=https://tu-backend.vercel.app
+   - Buscar: "DigitalHub2.0"
+   - Click "Import"
+   - Root Directory: "backend"
+   - Framework Preset: "Other"
    ```
 
-3. **Configurar Build Settings**:
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
+### 2.2 Configurar Variables de Entorno
 
-## 🔗 Paso 4: Conectar Frontend y Backend
+En la sección "Environment Variables" agregar:
 
-1. **Actualizar CORS en backend**:
-   - Ir a tu proyecto backend en Vercel
-   - Actualizar variable `FRONTEND_URL` con la URL real del frontend
+```env
+NODE_ENV=production
+PORT=3001
+JWT_SECRET=tu_jwt_secret_super_seguro_cambiar_por_uno_real_de_64_caracteres
+FRONTEND_URL=https://digital-hub-frontend.vercel.app
 
-2. **Actualizar API URL en frontend**:
-   - Ir a tu proyecto frontend en Vercel
-   - Actualizar variable `VITE_API_URL` con la URL real del backend
+# Credenciales de PlanetScale (ejemplo)
+DB_HOST=xxxxx.us-east-1.psdb.cloud
+DB_USER=xxxxx
+DB_PASS=pscale_pw_xxxxx
+DB_NAME=digital_hub
 
-## 🧪 Paso 5: Probar el Despliegue
-
-1. **Verificar backend**: Visitar `https://tu-backend.vercel.app`
-2. **Verificar frontend**: Visitar `https://tu-frontend.vercel.app`
-3. **Probar funcionalidades**:
-   - Login/registro
-   - CRUD de portátiles
-   - Reportes
-   - Subida de archivos
-
-## 🔧 Comandos Útiles
-
-### Desarrollo Local
-```bash
-# Backend
-cd backend
-npm run dev
-
-# Frontend
-cd frontend
-npm run dev
+# Gmail para envío de correos
+EMAIL_USER=tu_email@gmail.com
+EMAIL_PASS=tu_app_password_de_gmail
 ```
 
-### Migraciones de Base de Datos
-```bash
-cd backend
-npx knex migrate:latest
+### 2.3 Desplegar
+
+```
+- Click "Deploy"
+- Esperar 2-3 minutos
+- Copiar la URL generada (ej: https://digital-hub-backend-git-main-lauravasquez1107-web.vercel.app)
 ```
 
-### Ver logs en Vercel
-```bash
-npm install -g vercel
-vercel logs tu-proyecto-backend
+---
+
+## 🎨 PASO 3: Desplegar Frontend en Vercel
+
+### 3.1 Crear Segundo Proyecto
+
+1. **Nuevo proyecto:**
+   ```
+   - Vercel Dashboard > "Add New..." > "Project"
+   - Mismo repositorio: "DigitalHub2.0"
+   - Root Directory: "frontend"
+   - Framework Preset: "Vite"
+   ```
+
+### 3.2 Configurar Variables de Entorno
+
+```env
+VITE_API_URL=https://digital-hub-backend-git-main-lauravasquez1107-web.vercel.app
 ```
+
+### 3.3 Desplegar
+
+```
+- Click "Deploy"
+- Esperar 1-2 minutos
+- Copiar la URL del frontend
+```
+
+---
+
+## 🔗 PASO 4: Conectar Frontend y Backend
+
+### 4.1 Actualizar FRONTEND_URL en Backend
+
+1. **Ir al proyecto backend en Vercel:**
+   ```
+   - Settings > Environment Variables
+   - Editar FRONTEND_URL
+   - Nuevo valor: URL_REAL_DEL_FRONTEND
+   - Redeploy
+   ```
+
+### 4.2 Verificar CORS
+
+El backend ya está configurado para aceptar el frontend. Si hay problemas:
+
+```javascript
+// En backend/src/app.js ya está configurado:
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+```
+
+---
+
+## 🗄️ PASO 5: Configurar Base de Datos
+
+### 5.1 Ejecutar Migraciones
+
+**Opción A: Desde tu computadora**
+```bash
+# En la carpeta backend/
+node migrate-production.js
+```
+
+**Opción B: Desde Vercel (Recomendado)**
+1. Ir al proyecto backend en Vercel
+2. Functions > Ver logs
+3. Las migraciones se ejecutarán automáticamente en el primer request
+
+### 5.2 Verificar Conexión
+
+```bash
+# Probar la conexión
+node init-production.js
+```
+
+---
+
+## ✅ PASO 6: Verificar Funcionamiento
+
+### 6.1 Probar Endpoints
+
+```bash
+# Verificar que el backend responde
+curl https://tu-backend.vercel.app/api/test
+
+# Verificar conexión a BD
+curl https://tu-backend.vercel.app/api/usuarios
+```
+
+### 6.2 Probar Frontend
+
+1. **Abrir la URL del frontend**
+2. **Probar login/registro**
+3. **Verificar que se conecta al backend**
+
+---
+
+## 🔧 PASO 7: Configuraciones Adicionales
+
+### 7.1 Configurar Gmail para Correos
+
+1. **Habilitar 2FA en Gmail**
+2. **Generar App Password:**
+   ```
+   - Google Account > Security
+   - 2-Step Verification > App passwords
+   - Generar password para "Mail"
+   - Usar este password en EMAIL_PASS
+   ```
+
+### 7.2 Configurar Dominio Personalizado (Opcional)
+
+```
+- Vercel Dashboard > Domains
+- Add Domain
+- Configurar DNS
+```
+
+---
 
 ## 🚨 Solución de Problemas Comunes
 
 ### Error de CORS
-- Verificar que `FRONTEND_URL` esté configurada correctamente
-- Verificar que las URLs en `corsOptions` sean correctas
+```javascript
+// Verificar que FRONTEND_URL esté correcto en backend
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+```
 
 ### Error de Base de Datos
-- Verificar credenciales de conexión
-- Verificar que las migraciones se ejecutaron
-- Verificar que la base de datos esté accesible desde Vercel
+```javascript
+// Verificar conexión en backend/src/db/database.js
+// Logs en Vercel Functions
+```
 
-### Error 404 en rutas del Frontend
-- Verificar que `vercel.json` esté en la carpeta frontend
-- Verificar configuración de rewrites
-
-### Archivos no se suben
-- Los archivos se almacenan temporalmente en Vercel
-- Para persistencia, usar servicios como Cloudinary o AWS S3
-
-## 📝 URLs Finales
-
-Después del despliegue, tendrás:
-- **Backend**: `https://tu-backend.vercel.app`
-- **Frontend**: `https://tu-frontend.vercel.app`
-
-## 🔄 Actualizaciones Automáticas
-
-Vercel redesplegará automáticamente cuando hagas push a tu repositorio de GitHub.
+### Error 404 en Frontend
+```json
+// Verificar vercel.json en frontend
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
 
 ---
 
-¡Tu aplicación DigitalHub ya está en línea! 🎉
+## 📱 URLs Finales
+
+Una vez completado el despliegue:
+
+- **Frontend:** `https://digital-hub-frontend-git-main-lauravasquez1107-web.vercel.app`
+- **Backend:** `https://digital-hub-backend-git-main-lauravasquez1107-web.vercel.app`
+
+---
+
+## 🎉 ¡Listo!
+
+Tu aplicación DigitalHub 2.0 está ahora funcionando en producción con:
+
+✅ Backend desplegado en Vercel  
+✅ Frontend desplegado en Vercel  
+✅ Base de datos MySQL en la nube  
+✅ Variables de entorno configuradas  
+✅ CORS y seguridad configurados  
+✅ Sistema de correos funcionando  
+
+**¡Tu aplicación está lista para usar! 🚀**

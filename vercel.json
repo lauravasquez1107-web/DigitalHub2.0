@@ -1,0 +1,29 @@
+{
+  "experimentalServices": {
+    "frontend": {
+      "root": "frontend",
+      "routePrefix": "/",
+      "framework": "vite",
+      "env": {
+        "VITE_API_URL": "/_/backend"
+      }
+    },
+    "backend": {
+      "root": "backend",
+      "routePrefix": "/_/backend",
+      "framework": "other",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "JWT_SECRET": "digitalhub_2026_jwt_secret_super_seguro_cambiar_por_uno_mas_largo_64_caracteres",
+    "DB_HOST": "maglev.proxy.rlwy.net",
+    "DB_PORT": "27264",
+    "DB_USER": "root",
+    "DB_PASS": "rWKJrkHQoiMJwsIShmHBaHQlVLCQDLDr",
+    "DB_NAME": "railway"
+  }
+}
