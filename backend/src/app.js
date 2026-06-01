@@ -63,7 +63,26 @@ app.use("/asignacion", require("./routers/asignacion.routers"));
 // RUTA DE PRUEBA
 // ===============================
 app.get("/", (req, res) => {
-    res.send("API DigitalHub funcionando 🚀");
+    res.json({
+        message: "API DigitalHub funcionando 🚀",
+        status: "OK",
+        timestamp: new Date().toISOString(),
+        endpoints: [
+            "/api/usuarios",
+            "/api/portatiles", 
+            "/api/ambientes",
+            "/api/fichas"
+        ]
+    });
+});
+
+// Endpoint de salud
+app.get("/health", (req, res) => {
+    res.json({
+        status: "healthy",
+        database: "connected",
+        timestamp: new Date().toISOString()
+    });
 });
 
 // ===============================
