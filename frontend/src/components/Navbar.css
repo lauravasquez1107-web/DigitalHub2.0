@@ -1,0 +1,136 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  z-index: 1000;
+  backdrop-filter: blur(0px);
+  transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(10, 8, 22, 0.92);
+  border-bottom: 1px solid rgba(127, 90, 240, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nav-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+
+.logo-img {
+  height: 42px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(127, 90, 240, 0.12);
+}
+
+.nav-links a::after { display: none; }
+
+.nav-auth {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-login {
+  padding: 10px 24px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.25s ease;
+}
+
+.btn-login:hover {
+  color: #fff;
+  border-color: rgba(127,90,240,0.5);
+  background: rgba(127,90,240,0.1);
+}
+
+.btn-register {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #6b46e0, #5a3bc0);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: 0 2px 12px rgba(107, 70, 224, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-register:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(107, 70, 224, 0.45);
+  background: linear-gradient(135deg, #7f5af0, #6b46e0);
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 24px;
+  }
+
+  .nav-links {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+    order: 3;
+    width: 100%;
+  }
+
+  .nav-auth {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img { height: 34px; }
+  .nav-logo { font-size: 1rem; }
+  .nav-links a { font-size: 13px; padding: 6px 12px; }
+  .btn-login, .btn-register { padding: 8px 18px; font-size: 13px; }
+}
