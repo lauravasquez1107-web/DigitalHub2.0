@@ -20,6 +20,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Vercel Speed Insights middleware (optional - only affects HTML responses)
+const { speedInsightsMiddleware } = require("./utils/speedInsights");
+app.use(speedInsightsMiddleware);
+
 // ===============================
 // ROUTERS
 // ===============================
